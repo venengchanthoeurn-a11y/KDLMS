@@ -1,0 +1,1158 @@
+/* ================================================================
+   assets/css/style.css — Main Public Styles
+   KDLMS - Khmer Digital Library Management System
+   Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
+   ================================================================ */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Moul&family=Hanuman:wght@300;400;700&family=Noto+Serif+Khmer:wght@300;400;700&family=Kantumruy+Pro:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ================================================================
+   CSS CUSTOM PROPERTIES — ពណ៌ និង Font
+   ================================================================ */
+:root {
+    --primary:      #8B0000;   /* Deep Maroon — ក្រហមមាស */
+    --primary-dark: #6B0000;
+    --primary-light:#A52020;
+    --secondary:    #C8960C;   /* Royal Gold — មាស */
+    --secondary-light: #E8B530;
+    --accent:       #1A3A5C;   /* Deep Blue — ខៀវក្រម */
+    --accent-light: #2A5080;
+    --bg:           #FDF8F0;   /* Warm Cream — ពណ៌ស្ករ */
+    --bg-card:      #FFFFFF;
+    --cta:          #E8A020;   /* Saffron — លឿងខ្ចី */
+    --success:      #1B4332;   /* Dark Forest — បៃតងព្រៃ */
+    --text-body:    #4A4A4A;   /* Slate Gray — ប្រផ្ទះ */
+    --text-light:   #6B7280;
+    --text-muted:   #9CA3AF;
+    --border:       #E5E0D5;
+    --shadow-sm:    0 1px 3px rgba(139,0,0,0.08);
+    --shadow-md:    0 4px 16px rgba(139,0,0,0.12);
+    --shadow-lg:    0 8px 32px rgba(139,0,0,0.16);
+    --radius-sm:    8px;
+    --radius-md:    14px;
+    --radius-lg:    20px;
+    --radius-xl:    28px;
+
+    --font-moul:      'Moul', serif;
+    --font-hanuman:   'Hanuman', 'Noto Serif Khmer', serif;
+    --font-kantumruy: 'Kantumruy Pro', sans-serif;
+    --font-en:        'Inter', sans-serif;
+
+    --navbar-height: 70px;
+    --transition:    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================================================================
+   RESET & BASE — ការកំណត់ Base
+   ================================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+    font-family: var(--font-hanuman);
+    background-color: var(--bg);
+    color: var(--text-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Khmer text always uses Hanuman; English metadata uses Inter */
+.font-moul        { font-family: var(--font-moul) !important; }
+.font-hanuman     { font-family: var(--font-hanuman) !important; }
+.font-kantumruy   { font-family: var(--font-kantumruy) !important; }
+.font-en          { font-family: var(--font-en) !important; }
+
+/* ================================================================
+   SCROLLBAR — Custom Scroll
+   ================================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F5EFE6; }
+::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ================================================================
+   ANGKOR WAT BACKGROUND TEXTURE
+   ================================================================ */
+.angkor-bg {
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(200,150,12,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139,0,0,0.04) 0%, transparent 50%);
+}
+
+/* ================================================================
+   NAVBAR — Fixed top, scroll effect
+   ================================================================ */
+.kdlms-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
+}
+
+.kdlms-navbar.transparent {
+    background: linear-gradient(180deg, rgba(139,0,0,0.92) 0%, rgba(100,0,0,0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom-color: rgba(200,150,12,0.3);
+}
+
+.kdlms-navbar.scrolled {
+    background: var(--primary);
+    border-bottom-color: var(--secondary);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+/* Lotus border at bottom of navbar */
+.kdlms-navbar::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--secondary) 30%, var(--secondary) 70%, transparent 100%);
+}
+
+.navbar-brand-text {
+    font-family: var(--font-moul);
+    font-size: 1.1rem;
+    color: #F5D76E;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    line-height: 1.3;
+}
+
+.navbar-brand-text:hover { color: #FFE88A; }
+
+.navbar-brand-sub {
+    font-family: var(--font-en);
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.navbar-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--secondary), #E8A020);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(200,150,12,0.4);
+}
+
+.nav-link-custom {
+    color: rgba(255,255,255,0.85) !important;
+    font-family: var(--font-kantumruy);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 6px 14px !important;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.nav-link-custom:hover,
+.nav-link-custom.active {
+    color: #FFE88A !important;
+    background: rgba(255,255,255,0.1);
+}
+
+/* ================================================================
+   HERO SECTION — ផ្នែកវីរ
+   ================================================================ */
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg,
+        var(--primary) 0%,
+        #5C0000 30%,
+        var(--accent) 70%,
+        #0D2540 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: var(--navbar-height);
+}
+
+/* Angkor silhouette SVG overlay */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 260'%3E%3Cpath fill='rgba(200,150,12,0.07)' d='M0,200 L60,200 L60,180 L80,180 L80,150 L100,120 L110,100 L120,120 L130,100 L140,80 L150,60 L160,80 L170,100 L180,120 L190,150 L200,180 L210,200 L280,200 L280,185 L295,185 L295,165 L315,140 L335,165 L335,185 L355,185 L355,200 L420,200 L420,185 L435,175 L435,155 L450,130 L465,155 L465,175 L480,185 L480,200 L540,200 L540,180 L555,170 L555,150 L565,130 L580,105 L590,85 L600,65 L610,85 L620,105 L630,130 L640,150 L640,170 L655,180 L655,200 L720,200 L720,185 L735,175 L735,155 L750,130 L765,155 L765,175 L780,185 L780,200 L840,200 L840,185 L855,175 L855,155 L870,130 L880,105 L890,85 L900,65 L910,85 L920,105 L930,130 L940,150 L940,170 L955,180 L955,200 L1020,200 L1020,185 L1035,175 L1035,155 L1050,130 L1065,155 L1065,175 L1080,185 L1080,200 L1140,200 L1140,180 L1155,170 L1155,150 L1165,130 L1180,105 L1190,85 L1200,65 L1210,85 L1220,105 L1230,130 L1240,150 L1240,180 L1260,200 L1440,200 L1440,260 L0,260 Z'/%3E%3C/svg%3E") bottom no-repeat;
+    background-size: cover;
+}
+
+/* Lotus pattern overlay */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 C20 15, 10 20, 30 30 C50 20, 40 15, 30 5Z M30 55 C20 45, 10 40, 30 30 C50 40, 40 45, 30 55Z M5 30 C15 20, 20 10, 30 30 C20 50, 15 40, 5 30Z M55 30 C45 20, 40 10, 30 30 C40 50, 45 40, 55 30Z' fill='rgba(200,150,12,0.04)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,150,12,0.15);
+    border: 1px solid rgba(200,150,12,0.4);
+    color: #F5D76E;
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-family: var(--font-kantumruy);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-family: var(--font-moul);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #F5D76E;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-family: var(--font-hanuman);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.8);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+}
+
+/* ================================================================
+   BUTTONS — ប៊ូតុង
+   ================================================================ */
+.btn-primary-kdlms {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--cta), #D4900A);
+    color: #1A0A00;
+    font-family: var(--font-kantumruy);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(232,160,32,0.35);
+}
+
+.btn-primary-kdlms:hover {
+    background: linear-gradient(135deg, #F0B030, var(--cta));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(232,160,32,0.5);
+    color: #0A0500;
+}
+
+.btn-secondary-kdlms {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-family: var(--font-kantumruy);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    backdrop-filter: blur(4px);
+}
+
+.btn-secondary-kdlms:hover {
+    background: rgba(255,255,255,0.2);
+    color: #F5D76E;
+    border-color: rgba(200,150,12,0.5);
+}
+
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, var(--cta), #D4900A);
+    color: #1A0A00;
+    font-family: var(--font-kantumruy);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-download:hover {
+    background: linear-gradient(135deg, #F0B030, var(--cta));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(232,160,32,0.4);
+    color: #0A0500;
+}
+
+@keyframes pulse-download {
+    0%, 100% { box-shadow: 0 4px 12px rgba(232,160,32,0.3); }
+    50%       { box-shadow: 0 4px 20px rgba(232,160,32,0.7); }
+}
+
+.btn-download:hover { animation: pulse-download 1.2s ease-in-out infinite; }
+
+/* ================================================================
+   STATS COUNTER CARDS — ស្ថិតិ
+   ================================================================ */
+.stats-section { padding: 4rem 0; }
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transition: var(--transition);
+    transform-origin: left;
+}
+
+.stat-card:hover { border-color: var(--secondary); box-shadow: var(--shadow-md); }
+.stat-card:hover::before { transform: scaleX(1); }
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-number {
+    font-family: var(--font-en);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.stat-label {
+    font-family: var(--font-kantumruy);
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ================================================================
+   SECTION HEADERS
+   ================================================================ */
+.section-title {
+    font-family: var(--font-moul);
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.section-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+}
+
+/* ================================================================
+   CATEGORY CARDS — ប័ណ្ណប្រភេទ
+   ================================================================ */
+.category-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--cat-color, var(--primary));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.category-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary);
+}
+
+.category-card:hover::before { opacity: 0.06; }
+
+.category-icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+    display: block;
+    transition: var(--transition);
+}
+
+.category-card:hover .category-icon { transform: scale(1.15); }
+
+.category-name-kh {
+    font-family: var(--font-kantumruy);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-body);
+    display: block;
+    line-height: 1.4;
+    margin-bottom: 2px;
+}
+
+.category-name-en {
+    font-family: var(--font-en);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    display: block;
+}
+
+.category-count {
+    display: inline-block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: var(--font-en);
+    font-size: 0.65rem;
+    color: var(--text-light);
+    padding: 1px 8px;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+/* ================================================================
+   BOOK CARDS — ប័ណ្ណសៀវភៅ
+   ================================================================ */
+.book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary);
+}
+
+.book-cover-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--bg), #EFE8DC);
+    flex-shrink: 0;
+}
+
+.book-cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.book-card:hover .book-cover-wrap img { transform: scale(1.05); }
+
+.book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(139,0,0,0.2);
+    font-size: 3rem;
+}
+
+.book-cover-placeholder .placeholder-title {
+    font-family: var(--font-moul);
+    font-size: 0.65rem;
+    color: rgba(139,0,0,0.25);
+    text-align: center;
+    padding: 0 12px;
+    line-height: 1.5;
+}
+
+.book-ext-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: var(--font-en);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.book-featured-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--secondary);
+    color: white;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: var(--font-en);
+    font-weight: 700;
+}
+
+.book-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+}
+
+.book-category-tag {
+    font-family: var(--font-kantumruy);
+    font-size: 0.65rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.book-title-kh {
+    font-family: var(--font-kantumruy);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.book-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+}
+
+.book-size {
+    font-family: var(--font-en);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.book-downloads {
+    font-family: var(--font-en);
+    font-size: 0.68rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ================================================================
+   BROWSE PAGE — ទំព័រ Browse
+   ================================================================ */
+.browse-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    min-height: calc(100vh - var(--navbar-height));
+    padding-top: var(--navbar-height);
+}
+
+.browse-sidebar {
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    position: sticky;
+    top: var(--navbar-height);
+    height: calc(100vh - var(--navbar-height));
+    overflow-y: auto;
+}
+
+.browse-main {
+    padding: 1.5rem;
+    background: var(--bg);
+}
+
+.sidebar-cat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-body);
+    font-family: var(--font-kantumruy);
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-bottom: 2px;
+}
+
+.sidebar-cat-item:hover,
+.sidebar-cat-item.active {
+    background: rgba(139,0,0,0.07);
+    color: var(--primary);
+}
+
+.sidebar-cat-item.active {
+    font-weight: 700;
+    border-left: 3px solid var(--primary);
+    padding-left: 9px;
+}
+
+.sidebar-cat-count {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.65rem;
+    padding: 1px 7px;
+    font-family: var(--font-en);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Search bar */
+.kdlms-search-wrap {
+    position: relative;
+}
+
+.kdlms-search-input {
+    width: 100%;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px 12px 44px;
+    font-family: var(--font-kantumruy);
+    font-size: 0.875rem;
+    color: var(--text-body);
+    transition: var(--transition);
+    outline: none;
+}
+
+.kdlms-search-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139,0,0,0.08);
+}
+
+.kdlms-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+/* Filter bar */
+.filter-bar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.filter-bar select {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-family: var(--font-kantumruy);
+    font-size: 0.8rem;
+    color: var(--text-body);
+    background: var(--bg);
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-bar select:focus { border-color: var(--primary); }
+
+/* Books grid */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+/* ================================================================
+   PAGINATION — ការបែងចែកទំព័រ
+   ================================================================ */
+.kdlms-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    min-width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: white;
+    color: var(--text-body);
+    font-family: var(--font-en);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 0 10px;
+}
+
+.page-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(139,0,0,0.04); }
+.page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ================================================================
+   AUTH PAGES — Login / Register
+   ================================================================ */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary) 0%, #5C0000 40%, var(--accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 C20 15, 10 20, 30 30 C50 20, 40 15, 30 5Z M30 55 C20 45, 10 40, 30 30 C50 40, 40 45, 30 55Z M5 30 C15 20, 20 10, 30 30 C20 50, 15 40, 5 30Z M55 30 C45 20, 40 10, 30 30 C40 50, 45 40, 55 30Z' fill='rgba(200,150,12,0.05)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.auth-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 1;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-logo {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin: 0 auto 1rem;
+}
+
+.auth-title {
+    font-family: var(--font-moul);
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.auth-subtitle {
+    font-family: var(--font-kantumruy);
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+/* Form controls */
+.form-label-kh {
+    font-family: var(--font-kantumruy);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.form-control-kdlms {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-family: var(--font-kantumruy);
+    font-size: 0.875rem;
+    color: var(--text-body);
+    background: var(--bg);
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-control-kdlms:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(139,0,0,0.08);
+}
+
+/* ================================================================
+   TOAST NOTIFICATIONS — ការជូនដំណឹង
+   ================================================================ */
+.toast-container {
+    position: fixed;
+    top: calc(var(--navbar-height) + 12px);
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.kdlms-toast {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    min-width: 300px;
+    max-width: 380px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    pointer-events: all;
+    animation: slideInToast 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    border-left: 4px solid;
+}
+
+.kdlms-toast.success { border-left-color: #22C55E; }
+.kdlms-toast.error   { border-left-color: var(--primary); }
+.kdlms-toast.info    { border-left-color: var(--accent); }
+.kdlms-toast.warning { border-left-color: var(--cta); }
+
+.kdlms-toast.removing { animation: slideOutToast 0.3s ease forwards; }
+
+@keyframes slideInToast {
+    from { transform: translateX(110%); opacity: 0; }
+    to   { transform: translateX(0);   opacity: 1; }
+}
+
+@keyframes slideOutToast {
+    from { transform: translateX(0);   opacity: 1; }
+    to   { transform: translateX(110%); opacity: 0; }
+}
+
+.toast-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.toast-body { flex: 1; }
+.toast-title { font-family: var(--font-kantumruy); font-weight: 700; font-size: 0.82rem; color: var(--accent); }
+.toast-msg   { font-family: var(--font-kantumruy); font-size: 0.78rem; color: var(--text-light); }
+
+/* ================================================================
+   FOOTER — បាតជើង
+   ================================================================ */
+.kdlms-footer {
+    background: var(--accent);
+    color: rgba(255,255,255,0.8);
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.kdlms-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+}
+
+.footer-brand {
+    font-family: var(--font-moul);
+    font-size: 1rem;
+    color: #F5D76E;
+    margin-bottom: 0.5rem;
+}
+
+.footer-desc {
+    font-family: var(--font-kantumruy);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+}
+
+.footer-heading {
+    font-family: var(--font-kantumruy);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.footer-link {
+    display: block;
+    font-family: var(--font-kantumruy);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    padding: 3px 0;
+    transition: var(--transition);
+}
+
+.footer-link:hover { color: var(--secondary); padding-left: 4px; }
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+    text-align: center;
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+}
+
+.footer-creator {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* ================================================================
+   LOADING SPINNER — ចក្រ Dharma Wheel
+   ================================================================ */
+.dharma-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(200,150,12,0.2);
+    border-top-color: var(--secondary);
+    border-radius: 50%;
+    animation: dharmaSpin 0.8s linear infinite;
+}
+
+@keyframes dharmaSpin { to { transform: rotate(360deg); } }
+
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(253,248,240,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+    flex-direction: column;
+    gap: 16px;
+}
+
+.loading-text {
+    font-family: var(--font-moul);
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+/* ================================================================
+   EMPTY STATE
+   ================================================================ */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
+.empty-state-title {
+    font-family: var(--font-moul);
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+}
+
+/* ================================================================
+   ALERT / MESSAGE BOXES
+   ================================================================ */
+.alert-kdlms {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-kantumruy);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.alert-kdlms.success { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
+.alert-kdlms.error   { background: #FEF2F2; border: 1px solid #FECACA; color: var(--primary); }
+.alert-kdlms.info    { background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF; }
+.alert-kdlms.warning { background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; }
+
+/* ================================================================
+   RESPONSIVE — Mobile First
+   ================================================================ */
+@media (max-width: 992px) {
+    .browse-layout { grid-template-columns: 1fr; }
+    .browse-sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+    .books-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .hero-title { font-size: 1.6rem; }
+}
+
+@media (max-width: 576px) {
+    .books-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .hero-title { font-size: 1.35rem; }
+    .auth-card { padding: 1.75rem 1.25rem; }
+    .filter-bar { flex-direction: column; align-items: stretch; }
+}
+
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
+.text-primary-kdlms { color: var(--primary); }
+.text-secondary-kdlms { color: var(--secondary); }
+.text-accent-kdlms { color: var(--accent); }
+.bg-primary-kdlms { background-color: var(--primary); }
+.bg-secondary-kdlms { background-color: var(--secondary); }
+.rounded-kdlms { border-radius: var(--radius-md); }
+.shadow-kdlms { box-shadow: var(--shadow-md); }
+.transition-kdlms { transition: var(--transition); }
+
+/* Lotus decorative line */
+.lotus-divider {
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.lotus-divider::before,
+.lotus-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 40px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--secondary));
+}
+
+.lotus-divider::before { left: 0; }
+.lotus-divider::after  { right: 0; background: linear-gradient(90deg, var(--secondary), transparent); }
+
+.lotus-divider-inner {
+    display: inline-block;
+    color: var(--secondary);
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+    padding: 0 8px;
+    background: var(--bg);
+}

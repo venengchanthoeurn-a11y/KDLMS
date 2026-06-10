@@ -1,0 +1,85 @@
+{
+  "name": "ប្រព័ន្ធបណ្ណាល័យឌីជីថលខ្មែរ",
+  "short_name": "KDLMS",
+  "description": "Khmer Digital Library Management System — ចំណេះដឹងគ្មានព្រំដែន",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#8B0000",
+  "background_color": "#FDF8F0",
+  "lang": "km",
+  "dir": "ltr",
+  "categories": ["education", "books", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/img/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/img/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/img/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "KDLMS Desktop View"
+    },
+    {
+      "src": "/assets/img/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "KDLMS Mobile View"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ស្វែងរកសៀវភៅ",
+      "short_name": "Browse",
+      "description": "Browse all books",
+      "url": "/browse.php",
+      "icons": [{ "src": "/assets/img/icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Admin Panel",
+      "short_name": "Admin",
+      "description": "Manage the library",
+      "url": "/admin/index.php",
+      "icons": [{ "src": "/assets/img/icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "prefer_related_applications": false
+}

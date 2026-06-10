@@ -1,0 +1,39 @@
+# ================================================================
+# .gitignore — KDLMS - Khmer Digital Library Management System
+# ================================================================
+
+# Uploaded files (large binary — use cloud storage in production)
+uploads/*/
+!uploads/.htaccess
+
+# PHP ini override (local dev only)
+php.ini
+
+# Vercel local config
+.vercel/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+
+# Logs
+*.log
+error_log
+
+# Environment secrets (NEVER commit these)
+.env
+.env.local
+.env.production
+
+# Node (if any)
+node_modules/
+
+# Build artifacts
+dist/

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="km" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>គ្មានការតភ្ជាប់ · Offline — KDLMS</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#8B0000">
+    <link href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --primary: #8B0000;
+            --secondary: #C8960C;
+            --accent: #1A3A5C;
+            --bg: #FDF8F0;
+        }
+        body {
+            font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, #5C0000 40%, var(--accent) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200,150,12,0.3);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp .5s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity:0; transform:translateY(20px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .icon-wrap {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, var(--secondary), #E8A020);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 30px rgba(200,150,12,0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 30px rgba(200,150,12,0.4); }
+            50%       { transform: scale(1.05); box-shadow: 0 12px 40px rgba(200,150,12,0.6); }
+        }
+        h1 { font-family: 'Moul', serif; color: #F5D76E; font-size: 1.4rem; margin-bottom: .6rem; line-height: 1.5; }
+        .en-title { font-family: 'Inter', sans-serif; font-size: .85rem; color: rgba(255,255,255,.7); margin-bottom: 1.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+        p { color: rgba(255,255,255,.8); font-size: .9rem; line-height: 1.8; margin-bottom: 1.5rem; }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(200,150,12,.4), transparent); margin: 1.5rem 0; }
+        .features { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .feature { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .feature-icon { font-size: 1.5rem; }
+        .feature-text { font-size: .68rem; color: rgba(255,255,255,.6); }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, var(--secondary), #E8A020);
+            color: #1A0A00; font-weight: 700; font-size: .88rem;
+            padding: 12px 24px; border-radius: 12px; border: none;
+            cursor: pointer; text-decoration: none; transition: all .3s ease;
+            box-shadow: 0 4px 15px rgba(200,150,12,.4);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(200,150,12,.6); }
+        .status-dot {
+            display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+            background: #EF4444; margin-right: 6px;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+        .status-bar { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: 1.2rem; }
+        .logo-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; margin-bottom: .5rem; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <img src="/assets/img/icons/icon-192.png" alt="KDLMS" class="logo-img" onerror="this.style.display='none'">
+    <div class="icon-wrap">📶</div>
+    <h1>គ្មានការតភ្ជាប់អ៊ីនធឺណិត</h1>
+    <div class="en-title">You are offline</div>
+    <p>
+        ប្រព័ន្ធ KDLMS ត្រូវការការតភ្ជាប់អ៊ីនធឺណិត ដើម្បីបង្ហាញសៀវភៅ។<br>
+        <small style="color:rgba(255,255,255,.5);">KDLMS requires internet to show library content.</small>
+    </p>
+    <div class="divider"></div>
+    <div class="features">
+        <div class="feature"><span class="feature-icon">📚</span><span class="feature-text">ទំព័រដែលបានចូលថ្មីៗ<br>Recently visited pages</span></div>
+        <div class="feature"><span class="feature-icon">🔍</span><span class="feature-text">ស្វែងរក (offline)<br>Cached search</span></div>
+        <div class="feature"><span class="feature-icon">⚡</span><span class="feature-text">ឆាប់ពេល Online<br>Fast on reconnect</span></div>
+    </div>
+    <button class="btn" onclick="window.location.reload()">
+        🔄 ព្យាយាម​ម្ដងទៀត · Try Again
+    </button>
+    <div class="status-bar">
+        <span class="status-dot"></span> Offline · KDLMS v1.0 · ប្រព័ន្ធបណ្ណាល័យ
+    </div>
+</div>
+<script>
+    // Auto-retry when connection restored
+    window.addEventListener('online', () => {
+        window.location.reload();
+    });
+</script>
+</body>
+</html>

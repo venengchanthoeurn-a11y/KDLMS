@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
+  <!-- Traditional Khmer Lotus Pattern -->
+  <defs>
+    <pattern id="lotus" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <!-- Central lotus flower -->
+      <g transform="translate(30,30)">
+        <!-- Outer petals (8 directions) -->
+        <ellipse rx="4" ry="12" transform="rotate(0)"   fill="#C8960C" opacity="0.6"/>
+        <ellipse rx="4" ry="12" transform="rotate(45)"  fill="#C8960C" opacity="0.5"/>
+        <ellipse rx="4" ry="12" transform="rotate(90)"  fill="#C8960C" opacity="0.6"/>
+        <ellipse rx="4" ry="12" transform="rotate(135)" fill="#C8960C" opacity="0.5"/>
+        <ellipse rx="4" ry="12" transform="rotate(180)" fill="#C8960C" opacity="0.6"/>
+        <ellipse rx="4" ry="12" transform="rotate(225)" fill="#C8960C" opacity="0.5"/>
+        <ellipse rx="4" ry="12" transform="rotate(270)" fill="#C8960C" opacity="0.6"/>
+        <ellipse rx="4" ry="12" transform="rotate(315)" fill="#C8960C" opacity="0.5"/>
+        <!-- Inner petals -->
+        <ellipse rx="3" ry="8" transform="rotate(22.5)"  fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(67.5)"  fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(112.5)" fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(157.5)" fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(202.5)" fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(247.5)" fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(292.5)" fill="#8B0000" opacity="0.5"/>
+        <ellipse rx="3" ry="8" transform="rotate(337.5)" fill="#8B0000" opacity="0.5"/>
+        <!-- Center dot -->
+        <circle r="3" fill="#C8960C" opacity="0.8"/>
+        <circle r="1.5" fill="#8B0000" opacity="0.9"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="120" height="60" fill="url(#lotus)"/>
+</svg>
