@@ -14,14 +14,80 @@ mb_internal_encoding('UTF-8');
 mb_language('uni');  // Unicode mode for mb_ functions
 // ────────────────────────────────────────────────────────────────
 
+class CookieSessionHandler implements SessionHandlerInterface {
+    private string $cookieName = 'KDLMS_SESS';
+    private string $key = 'KDLMS_SECURE_COOKIE_SESSION_KEY_2025';
+
+    public function open(string $path, string $name): bool {
+        return true;
+    }
+    public function close(): bool {
+        return true;
+    }
+    public function read(string $id): string {
+        if (isset($_COOKIE[$this->cookieName])) {
+            $decrypted = $this->decrypt($_COOKIE[$this->cookieName]);
+            return $decrypted !== false ? $decrypted : '';
+        }
+        return '';
+    }
+    public function write(string $id, string $data): bool {
+        $encrypted = $this->encrypt($data);
+        $secure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+        if (str_contains($_SERVER['HTTP_HOST'] ?? '', 'vercel.app')) {
+            $secure = true;
+        }
+        setcookie($this->cookieName, $encrypted, [
+            'expires'  => time() + 86400, // 24 hours
+            'path'     => '/',
+            'secure'   => $secure,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+        return true;
+    }
+    public function destroy(string $id): bool {
+        setcookie($this->cookieName, '', time() - 3600, '/');
+        if (isset($_COOKIE[$this->cookieName])) {
+            unset($_COOKIE[$this->cookieName]);
+        }
+        return true;
+    }
+    public function gc(int $max_lifetime): int|false {
+        return 0;
+    }
+    private function encrypt(string $data): string {
+        $method = 'aes-256-cbc';
+        $iv_length = openssl_cipher_iv_length($method);
+        $iv = openssl_random_bytes($iv_length);
+        $encrypted = openssl_encrypt($data, $method, $this->key, 0, $iv);
+        return base64_encode($iv . $encrypted);
+    }
+    private function decrypt(string $data): string|false {
+        $decoded = base64_decode($data);
+        $method = 'aes-256-cbc';
+        $iv_length = openssl_cipher_iv_length($method);
+        if (strlen($decoded) < $iv_length) {
+            return false;
+        }
+        $iv = substr($decoded, 0, $iv_length);
+        $encrypted = substr($decoded, $iv_length);
+        return openssl_decrypt($encrypted, $method, $this->key, 0, $iv);
+    }
+}
+
 if (session_status() === PHP_SESSION_NONE) {
-    session_set_cookie_params([
-        'lifetime' => 0,
-        'path'     => '/',
-        'secure'   => false, // set true on HTTPS
-        'httponly' => true,
-        'samesite' => 'Lax',
-    ]);
+    if (getenv('VERCEL') || getenv('VERCEL_ENV') || str_contains($_SERVER['HTTP_HOST'] ?? '', 'vercel.app')) {
+        session_set_save_handler(new CookieSessionHandler(), true);
+    } else {
+        session_set_cookie_params([
+            'lifetime' => 0,
+            'path'     => '/',
+            'secure'   => false, // set true on HTTPS
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+    }
     session_start();
 }
 

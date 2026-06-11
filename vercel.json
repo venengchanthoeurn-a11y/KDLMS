@@ -69,19 +69,7 @@
       "dest": "/offline.html"
     },
     {
-      "src": "/admin/(.*)\\.php",
-      "dest": "/admin/$1.php"
-    },
-    {
-      "src": "/(.*)\\.php",
-      "dest": "/$1.php"
-    },
-    {
       "src": "/",
-      "dest": "/index.php"
-    },
-    {
-      "src": "/(.*)",
       "dest": "/index.php"
     }
   ]
