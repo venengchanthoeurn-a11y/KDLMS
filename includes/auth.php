@@ -56,10 +56,10 @@ class CookieSessionHandler implements SessionHandlerInterface {
     public function gc(int $max_lifetime): int|false {
         return 0;
     }
-    private function encrypt(string $data): string {
+        private function encrypt(string $data): string {
         $method = 'aes-256-cbc';
         $iv_length = openssl_cipher_iv_length($method);
-        $iv = openssl_random_bytes($iv_length);
+        $iv = random_bytes($iv_length);
         $encrypted = openssl_encrypt($data, $method, $this->key, 0, $iv);
         return base64_encode($iv . $encrypted);
     }
