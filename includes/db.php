@@ -65,6 +65,41 @@ define('BASE_URL', detectBaseUrl());
 define('APP_VERSION', '1.0');
 
 
+// Define custom SafePDO classes for read-only SQLite fallback
+if (!class_exists('SafePDOStatement')) {
+    class SafePDOStatement extends PDOStatement {
+        protected $db;
+        protected function __construct($db) {
+            $this->db = $db;
+        }
+        public function execute(?array $params = null): bool {
+            try {
+                return parent::execute($params);
+            } catch (PDOException $e) {
+                if (str_contains($e->getMessage(), 'readonly') || str_contains($e->getMessage(), 'read-only') || str_contains($e->getMessage(), 'attempt to write')) {
+                    return true;
+                }
+                throw $e;
+            }
+        }
+    }
+}
+
+if (!class_exists('SafePDO')) {
+    class SafePDO extends PDO {
+        public function exec(string $statement): int|false {
+            try {
+                return parent::exec($statement);
+            } catch (PDOException $e) {
+                if (str_contains($e->getMessage(), 'readonly') || str_contains($e->getMessage(), 'read-only') || str_contains($e->getMessage(), 'attempt to write')) {
+                    return 0;
+                }
+                throw $e;
+            }
+        }
+    }
+}
+
 /**
  * getPDO() — Returns a singleton PDO connection.
  * ការតភ្ជាប់ PDO តែមួយ ដើម្បីសន្សំបរិក្ខារ។
@@ -105,9 +140,10 @@ function getPDO(): PDO {
                 $sqlitePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'kdlms.sqlite';
                 if (file_exists($sqlitePath)) {
                     try {
-                        $pdo = new PDO('sqlite:' . $sqlitePath);
+                        $pdo = new SafePDO('sqlite:' . $sqlitePath);
                         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                        $pdo->setAttribute(PDO::ATTR_STATEMENT_CLASS, ['SafePDOStatement', [$pdo]]);
                         return $pdo;
                     } catch (PDOException $sqle) {
                         error_log('SQLite fallback failed: ' . $sqle->getMessage());
