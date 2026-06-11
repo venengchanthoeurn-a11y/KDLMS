@@ -5,6 +5,8 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
+ob_start();
+
 // ─── UTF-8 / Khmer session encoding fix ─────────────────────────
 // Must run BEFORE session_start() so PHP session file uses UTF-8.
 // This prevents Khmer name/text from becoming ??? in browser sessions.
