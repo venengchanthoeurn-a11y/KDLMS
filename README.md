@@ -18,14 +18,6 @@ A full-stack PHP/MySQL digital library PWA built for Cambodian institutions, sch
 
 ---
 
-## 🚀 Live Demo
-
-> **[https://kdlms.vercel.app](https://kdlms.vercel.app)** ← Live on Vercel
-
-**Login:** `admin@kdlms.kh` / `Admin@2025`
-
----
-
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
