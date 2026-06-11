@@ -196,10 +196,7 @@ if ($msgParam === 'logged_out') {
         </p>
 
         <!-- Demo credentials info -->
-        <div style="margin-top:1rem;padding:10px 14px;background:#FFF8F0;border:1px dashed rgba(200,150,12,.3);border-radius:8px;font-family:'Inter',sans-serif;font-size:.7rem;color:#92400E;">
-            <strong>Demo Superadmin:</strong> admin@kdlms.kh / Admin@2025
-        </div>
-    </div>
+        
 </div>
 
 <script>
