@@ -5,9 +5,9 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
-require_once '../includes/functions.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 requireSuperadmin(); // Only superadmin can change settings
 
@@ -45,7 +45,7 @@ foreach ($rows as $row) $s[$row['setting_key']] = $row['setting_value'];
 
 $pageTitle = 'System Settings';
 $activeNav = 'settings';
-include '../includes/admin_header.php';
+include __DIR__ . '/../includes/admin_header.php';
 ?>
 
 <div class="row g-4">

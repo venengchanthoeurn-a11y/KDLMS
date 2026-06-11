@@ -5,9 +5,9 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
-require_once 'includes/db.php';
-require_once 'includes/auth.php';
-require_once 'includes/functions.php';
+require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/functions.php';
 
 // Handle AJAX requests — return JSON
 $isAjax = isset($_GET['ajax']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest');
@@ -41,7 +41,7 @@ if ($opts['category_id'] > 0) {
 
 $pageTitle = 'ស្វែងរកសៀវភៅ · Browse Library';
 $bodyClass = '';
-include 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 ?>
 
 <div class="browse-layout">
@@ -239,4 +239,4 @@ function applyFilter(key, value) {
 }
 </script>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

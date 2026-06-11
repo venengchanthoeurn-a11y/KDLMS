@@ -5,9 +5,9 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
-require_once '../includes/functions.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 requireAdmin();
 
@@ -86,7 +86,7 @@ $categories = getCategories();
 
 $pageTitle = 'គ្រប់គ្រងសៀវភៅ · Manage Books';
 $activeNav = 'books';
-include '../includes/admin_header.php';
+include __DIR__ . '/../includes/admin_header.php';
 ?>
 
 <!-- Toolbar -->

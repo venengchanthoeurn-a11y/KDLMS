@@ -5,9 +5,9 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
-require_once '../includes/functions.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 requireAdmin();
 
@@ -65,7 +65,7 @@ $newUsers = $newUsersStmt->fetchAll();
 
 $pageTitle = 'Dashboard';
 $activeNav = 'dashboard';
-include '../includes/admin_header.php';
+include __DIR__ . '/../includes/admin_header.php';
 ?>
 
 <!-- ============================================================

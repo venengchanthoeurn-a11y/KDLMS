@@ -5,14 +5,14 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
-require_once 'includes/db.php';
-require_once 'includes/auth.php';
-require_once 'includes/functions.php';
+require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/functions.php';
 
 $pageTitle = getSetting('site_name_en', 'Khmer Digital Library Management System');
 $bodyClass = ''; // No special class for homepage
 
-include 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 
 // Fetch data for homepage
 $stats         = getStats();
@@ -278,4 +278,4 @@ $categories    = getCategories(withCount: true);
     </div>
 </section>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

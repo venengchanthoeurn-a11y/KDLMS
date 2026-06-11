@@ -5,9 +5,9 @@
 // Author: អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
 // ================================================================
 
-require_once 'includes/db.php';
-require_once 'includes/auth.php';
-require_once 'includes/functions.php';
+require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/functions.php';
 
 // If already logged in, redirect appropriately
 if (isLoggedIn()) {
