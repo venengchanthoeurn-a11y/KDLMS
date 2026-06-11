@@ -40,13 +40,16 @@ function detectBaseUrl(): string {
     if (PHP_SAPI === 'cli') return 'http://localhost/MSDL';
 
     $proto  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+        $proto = 'https';
+    }
     $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
     $script = $_SERVER['SCRIPT_NAME'] ?? '';
 
-    // Vercel deployment — no subfolder
+    // Vercel deployment — no subfolder and always force HTTPS
     if (str_contains($host, 'vercel.app') || str_contains($host, '.vercel.app') ||
         getenv('VERCEL') || getenv('VERCEL_ENV')) {
-        return $proto . '://' . $host;
+        return 'https://' . $host;
     }
 
     // XAMPP: derive base from script path (e.g. /MSDL/index.php → /MSDL)
