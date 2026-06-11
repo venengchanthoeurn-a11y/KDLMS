@@ -3,11 +3,17 @@
   "builds": [
     {
       "src": "*.php",
-      "use": "vercel-php@0.7.1"
+      "use": "vercel-php@0.7.1",
+      "config": {
+        "includeFiles": ["includes/**", "kdlms.sqlite"]
+      }
     },
     {
       "src": "admin/*.php",
-      "use": "vercel-php@0.7.1"
+      "use": "vercel-php@0.7.1",
+      "config": {
+        "includeFiles": ["includes/**", "kdlms.sqlite"]
+      }
     },
     {
       "src": "assets/**",
