@@ -17,7 +17,10 @@ $pdo = getPDO();
 $totalBooks      = (int)$pdo->query("SELECT COUNT(*) FROM books WHERE status='active'")->fetchColumn();
 $totalUsers      = (int)$pdo->query("SELECT COUNT(*) FROM users WHERE role='user'")->fetchColumn();
 $totalCategories = (int)$pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn();
-$todayDownloads  = (int)$pdo->query("SELECT COUNT(*) FROM download_logs WHERE DATE(downloaded_at)=CURDATE()")->fetchColumn();
+$today = date('Y-m-d');
+$todayDownloadsStmt = $pdo->prepare("SELECT COUNT(*) FROM download_logs WHERE DATE(downloaded_at) = ?");
+$todayDownloadsStmt->execute([$today]);
+$todayDownloads = (int)$todayDownloadsStmt->fetchColumn();
 
 // --- Recent Downloads (last 10) ---
 $recentDlStmt = $pdo->query(
