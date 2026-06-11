@@ -96,11 +96,23 @@ function getBooks(array $opts = []): array {
     }
 
     $searchRelevance = '';
+    $isSqlite = ($pdo->getAttribute(PDO::ATTR_DRIVER_NAME) === 'sqlite');
+
     if (!empty($search)) {
-        $where[]         = 'MATCH(b.title_kh, b.title_en, b.author, b.tags) AGAINST(? IN BOOLEAN MODE)';
-        $params[]        = $search . '*';
-        $searchRelevance = ', MATCH(b.title_kh, b.title_en, b.author, b.tags) AGAINST(? IN BOOLEAN MODE) AS relevance';
-        $params[]        = $search . '*'; // for SELECT
+        if ($isSqlite) {
+            $where[] = '(b.title_kh LIKE ? OR b.title_en LIKE ? OR b.author LIKE ? OR b.tags LIKE ?)';
+            $searchParam = '%' . $search . '%';
+            $params[] = $searchParam;
+            $params[] = $searchParam;
+            $params[] = $searchParam;
+            $params[] = $searchParam;
+            $searchRelevance = ', 0 AS relevance';
+        } else {
+            $where[]         = 'MATCH(b.title_kh, b.title_en, b.author, b.tags) AGAINST(? IN BOOLEAN MODE)';
+            $params[]        = $search . '*';
+            $searchRelevance = ', MATCH(b.title_kh, b.title_en, b.author, b.tags) AGAINST(? IN BOOLEAN MODE) AS relevance';
+            $params[]        = $search . '*'; // for SELECT
+        }
     }
 
     $orderMap = [
@@ -115,15 +127,11 @@ function getBooks(array $opts = []): array {
     $whereSQL = implode(' AND ', $where);
 
     // Count total
-    $countParams = array_filter($params, function($v, $k) use ($search) {
-        // The second copy of search param is for SELECT relevance, not COUNT
-        return true;
-    }, ARRAY_FILTER_USE_BOTH);
-
-    // For count query we don't need the extra relevance param
-    $countParamsCopy = $params;
-    if (!empty($search)) {
-        array_pop($countParamsCopy); // remove the second search param
+    if (!empty($search) && !$isSqlite) {
+        $countParamsCopy = $params;
+        array_pop($countParamsCopy); // remove the second search param for MySQL
+    } else {
+        $countParamsCopy = $params;
     }
 
     $countStmt = $pdo->prepare("SELECT COUNT(*) FROM books b WHERE $whereSQL");
@@ -131,7 +139,6 @@ function getBooks(array $opts = []): array {
     $total = (int)$countStmt->fetchColumn();
 
     // Reorder params: relevance comes after WHERE, before LIMIT
-    // For SELECT with relevance: params = [WHERE params..., search (relevance), limit, offset]
     $selectParams = $params;
     $selectParams[] = $perPage;
     $selectParams[] = $offset;

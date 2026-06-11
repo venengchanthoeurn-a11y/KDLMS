@@ -72,6 +72,13 @@ function getPDO(): PDO {
     static $pdo = null;
 
     if ($pdo === null) {
+        // We fall back to SQLite if DB_HOST is not set or MySQL connection fails,
+        // unless a non-default/non-localhost DB_HOST is explicitly configured (e.g. remote MySQL in production)
+        $useSqliteFallback = true;
+        if (getenv('DB_HOST') && getenv('DB_HOST') !== 'localhost' && getenv('DB_HOST') !== '127.0.0.1') {
+            $useSqliteFallback = false;
+        }
+
         $dsn = sprintf(
             'mysql:host=%s;dbname=%s;charset=%s',
             DB_HOST,
@@ -83,14 +90,29 @@ function getPDO(): PDO {
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
-            // Force UTF-8 encoding for Khmer text / ប្រើ UTF-8 សម្រាប់អក្សរខ្មែរ
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci",
         ];
 
         try {
-            $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+            $mysqlOptions = $options;
+            $mysqlOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci";
+            $pdo = new PDO($dsn, DB_USER, DB_PASS, $mysqlOptions);
         } catch (PDOException $e) {
-            // ត្រង់បញ្ហាដោយមិនបង្ហាញ credentials ពិតប្រាកដ
+            if ($useSqliteFallback) {
+                // Try to find the SQLite database file
+                $sqlitePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'kdlms.sqlite';
+                if (file_exists($sqlitePath)) {
+                    try {
+                        $pdo = new PDO('sqlite:' . $sqlitePath);
+                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                        return $pdo;
+                    } catch (PDOException $sqle) {
+                        error_log('SQLite fallback failed: ' . $sqle->getMessage());
+                    }
+                }
+            }
+
+            // If SQLite fallback is disabled or failed, log and show MySQL error
             error_log('KDLMS DB Error: ' . $e->getMessage());
             die('<div style="font-family:sans-serif;padding:40px;text-align:center;color:#8B0000;">
                 <h2>⚠️ មិនអាចភ្ជាប់ទិន្នន័យ (Database Connection Failed)</h2>

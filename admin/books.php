@@ -61,8 +61,17 @@ if (!empty($filterStat) && $filterStat !== 'all') {
 if ($filterCat > 0)   { $where[] = 'b.category_id = ?'; $params[] = $filterCat; }
 if (!empty($filterExt)) { $where[] = 'b.file_extension = ?'; $params[] = $filterExt; }
 if (!empty($search)) {
-    $where[]  = 'MATCH(b.title_kh, b.title_en, b.author, b.tags) AGAINST(? IN BOOLEAN MODE)';
-    $params[] = $search . '*';
+    if ($pdo->getAttribute(PDO::ATTR_DRIVER_NAME) === 'sqlite') {
+        $where[]  = '(b.title_kh LIKE ? OR b.title_en LIKE ? OR b.author LIKE ? OR b.tags LIKE ?)';
+        $searchParam = '%' . $search . '%';
+        $params[] = $searchParam;
+        $params[] = $searchParam;
+        $params[] = $searchParam;
+        $params[] = $searchParam;
+    } else {
+        $where[]  = 'MATCH(b.title_kh, b.title_en, b.author, b.tags) AGAINST(? IN BOOLEAN MODE)';
+        $params[] = $search . '*';
+    }
 }
 
 $whereSQL = $where ? 'WHERE ' . implode(' AND ', $where) : '';

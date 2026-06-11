@@ -24,6 +24,10 @@
     {
       "src": "offline.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "kdlms.sqlite",
+      "use": "@vercel/static"
     }
   ],
   "routes": [

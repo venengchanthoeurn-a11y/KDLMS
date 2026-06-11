@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_role'] = $user['role'];
 
                 // Update last_login timestamp
-                $pdo->prepare("UPDATE users SET last_login = NOW() WHERE id = ?")->execute([$user['id']]);
+                $pdo->prepare("UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?")->execute([$user['id']]);
 
                 // Redirect based on role
                 $redirectTo = $_SESSION['redirect_after_login'] ?? null;
