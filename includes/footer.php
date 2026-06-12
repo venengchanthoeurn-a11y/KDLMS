@@ -85,15 +85,18 @@ $stats      = getStats();
                 <p class="footer-desc" style="font-size:.78rem;">
                     ប្រព័ន្ធ KDLMS ត្រូវបានរចនា និងអភិវឌ្ឍដោយប្រើ PHP 8, MySQL, Bootstrap 5 ក្នុងគោលបំណង ផ្ដល់ការចូលដំណើរការឯកសារ និងសៀវភៅ ប្រកបដោយភាព ប្រសើរ។
                 </p>
-                <div style="margin-top:12px;padding:10px 14px;background:rgba(200,150,12,.12);border:1px solid rgba(200,150,12,.25);border-radius:8px;font-size:.75rem;">
-                    <div style="color:#F5D76E;font-family:'Kantumruy Pro',sans-serif;font-weight:700;margin-bottom:3px;">
-                        <i class="bi bi-code-slash me-1"></i>បង្កើតដោយ (Created by)
-                    </div>
-                    <div style="color:rgba(255,255,255,.85);font-family:'Hanuman',serif;">
-                        អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
-                    </div>
-                    <div style="color:rgba(255,255,255,.4);font-size:.65rem;font-family:'Inter',sans-serif;margin-top:2px;">
-                        KDLMS v<?= APP_VERSION ?> © <?= date('Y') ?>
+                <div style="margin-top:12px;padding:10px 14px;background:rgba(200,150,12,.12);border:1px solid rgba(200,150,12,.25);border-radius:8px;font-size:.75rem;display:flex;align-items:center;gap:12px;">
+                    <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="អេង ចាន់ធឿន" style="width:45px;height:45px;border-radius:50%;object-fit:cover;border:1.5px solid #C8960C;flex-shrink:0;">
+                    <div>
+                        <div style="color:#F5D76E;font-family:'Kantumruy Pro',sans-serif;font-weight:700;margin-bottom:3px;">
+                            <i class="bi bi-code-slash me-1"></i>បង្កើតដោយ (Created by)
+                        </div>
+                        <div style="color:rgba(255,255,255,.85);font-family:'Hanuman',serif;font-weight:700;">
+                            អេង ចាន់ធឿន (Eng Chanthoeun - Vthe)
+                        </div>
+                        <div style="color:rgba(255,255,255,.4);font-size:.65rem;font-family:'Inter',sans-serif;margin-top:2px;">
+                            KDLMS v<?= APP_VERSION ?> © <?= date('Y') ?>
+                        </div>
                     </div>
                 </div>
             </div>
