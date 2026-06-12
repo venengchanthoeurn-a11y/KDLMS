@@ -199,8 +199,8 @@ include __DIR__ . '/../includes/admin_header.php';
                 <div class="admin-card-title" style="color:#92400E;"><i class="bi bi-person-badge"></i> System Creator</div>
             </div>
             <div class="admin-card-body" style="font-family:'Inter',sans-serif;font-size:.82rem;text-align:center;padding:1rem;">
-                <div style="width:75px;height:75px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:2px solid #C8960C;display:flex;align-items:center;justify-content:center;background:#fff;padding:3px;">
-                    <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="អេង ចាន់ធឿន" style="max-width:100%;max-height:100%;object-fit:contain;">
+                <div style="width:75px;height:75px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:2px solid #C8960C;">
+                    <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="អេង ចាន់ធឿន" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;">
                 </div>
                 <div style="font-family:'Moul',serif;font-size:.9rem;color:#8B0000;margin-bottom:3px;">អេង ចាន់ធឿន</div>
                 <div style="color:#64748B;font-size:.75rem;">Eng Chanthoeun - Vthe</div>

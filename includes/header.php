@@ -148,8 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="d-flex align-items-center gap-2">
                     <span class="d-none d-md-block" style="font-family:'Kantumruy Pro','Hanuman',sans-serif;font-size:.8rem;color:rgba(255,255,255,.8);">
                         <span style="display:inline-flex;align-items:center;vertical-align:middle;">
-                            <span style="width:24px;height:24px;border-radius:50%;border:1px solid #C8960C;background:#fff;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;padding:1.5px;flex-shrink:0;margin-right:6px;">
-                                <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="max-width:100%;max-height:100%;object-fit:contain;">
+                            <span style="width:24px;height:24px;border-radius:50%;border:1px solid #C8960C;background:#fff;display:inline-block;overflow:hidden;flex-shrink:0;margin-right:6px;">
+                                <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;">
                             </span>
                             <?= htmlspecialchars($navUserName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
                         </span>
