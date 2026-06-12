@@ -148,9 +148,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="d-flex align-items-center gap-2">
                     <span class="d-none d-md-block" style="font-family:'Kantumruy Pro','Hanuman',sans-serif;font-size:.8rem;color:rgba(255,255,255,.8);">
                         <span style="display:inline-flex;align-items:center;vertical-align:middle;">
-                            <span style="width:24px;height:24px;border-radius:50%;border:1px solid #C8960C;background:#fff;display:inline-block;overflow:hidden;flex-shrink:0;margin-right:6px;">
-                                <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;">
-                            </span>
+                            <?php if (in_array($_SESSION['user_role'] ?? '', ['admin', 'superadmin'])): ?>
+                                <span style="width:24px;height:24px;border-radius:50%;border:1px solid #C8960C;background:#fff;display:inline-block;overflow:hidden;flex-shrink:0;margin-right:6px;">
+                                    <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;">
+                                </span>
+                            <?php else: ?>
+                                <i class="bi bi-person-circle me-1"></i>
+                            <?php endif; ?>
                             <?= htmlspecialchars($navUserName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
                         </span>
                     </span>
