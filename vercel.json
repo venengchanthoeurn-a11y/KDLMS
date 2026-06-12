@@ -30,13 +30,13 @@
     {
       "src": "offline.html",
       "use": "@vercel/static"
-    },
-    {
-      "src": "kdlms.sqlite",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "^/(includes|sql|scratch|uploads|\\.git|\\.vercel|\\.env|composer\\.json|package\\.json|package-lock\\.json|vercel\\.json|php\\.ini|README\\.md|kdlms\\.sqlite)(/.*)?$",
+      "status": 403
+    },
     {
       "src": "/sw\\.js",
       "dest": "/sw.js",
