@@ -1,4 +1,4 @@
-# 📚 KDLMS — ប្រព័ន្ធបណ្ណាល័យឌីជីថលខ្មែរ
+# 📚 KDLMS — បណ្ណាល័យឌីជីថលខ្មែរ
 
 **Khmer Digital Library Management System** — ចំណេះដឹងគ្មានព្រំដែន
 

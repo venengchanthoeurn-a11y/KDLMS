@@ -256,11 +256,18 @@ function getSetting(string $key, string $default = ''): string {
  */
 function setSetting(string $key, string $value): void {
     $pdo  = getPDO();
-    $stmt = $pdo->prepare(
-        "INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)
-         ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)"
-    );
-    $stmt->execute([$key, $value]);
+    // Database-agnostic upsert (compatible with MySQL and SQLite)
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM settings WHERE setting_key = ?");
+    $stmt->execute([$key]);
+    $exists = $stmt->fetchColumn() > 0;
+
+    if ($exists) {
+        $stmt = $pdo->prepare("UPDATE settings SET setting_value = ? WHERE setting_key = ?");
+        $stmt->execute([$value, $key]);
+    } else {
+        $stmt = $pdo->prepare("INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)");
+        $stmt->execute([$key, $value]);
+    }
 }
 
 // ================================================================

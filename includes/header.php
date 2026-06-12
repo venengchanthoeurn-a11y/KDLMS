@@ -13,7 +13,7 @@ require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/auth.php';
 
-$siteName = getSetting('site_name_kh', 'ប្រព័ន្ធបណ្ណាល័យឌីជីថលខ្មែរ');
+$siteName = getSetting('site_name_kh', 'បណ្ណាល័យឌីជីថលខ្មែរ');
 $siteNameEn = getSetting('site_name_en', 'Khmer Digital Library');
 $pageTitle  = $pageTitle ?? $siteNameEn;
 $bodyClass  = $bodyClass ?? '';

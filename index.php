@@ -34,7 +34,7 @@ $categories    = getCategories(withCount: true);
 
             <!-- Main title -->
             <h1 class="hero-title">
-                សូមស្វាគមន៍ការចូលមកកាន់<br>បណ្ណាល័យឌីជីថល វត្តឥន្ទខីលារាម-ថ្មគោល
+                សូមស្វាគមន៍ការចូលមកកាន់<br>បណ្ណាល័យឌីជីថលខ្មែរ
             </h1>
             
             <p class="hero-subtitle">
@@ -144,22 +144,20 @@ $categories    = getCategories(withCount: true);
         </div>
         <div class="section-divider"></div>
 
-        <div class="row g-3">
+        <div class="categories-grid">
             <?php foreach ($categories as $cat): ?>
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="<?= BASE_URL ?>/browse.php?category=<?= $cat['id'] ?>"
-                   class="category-card"
-                   style="--cat-color: <?= e($cat['color']) ?>;">
-                    <span class="category-icon" style="color:<?= e($cat['color']) ?>;">
-                        <i class="bi <?= e($cat['icon']) ?>"></i>
-                    </span>
-                    <span class="category-name-kh"><?= e($cat['name_kh']) ?></span>
-                    <span class="category-name-en"><?= e($cat['name_en']) ?></span>
-                    <span class="category-count">
-                        <?= number_format($cat['book_count'] ?? 0) ?> ឯកសារ
-                    </span>
-                </a>
-            </div>
+            <a href="<?= BASE_URL ?>/browse.php?category=<?= $cat['id'] ?>"
+               class="category-card"
+               style="--cat-color: <?= e($cat['color']) ?>;">
+                <span class="category-icon" style="color:<?= e($cat['color']) ?>;">
+                    <i class="bi <?= e($cat['icon']) ?>"></i>
+                </span>
+                <span class="category-name-kh"><?= e($cat['name_kh']) ?></span>
+                <span class="category-name-en"><?= e($cat['name_en']) ?></span>
+                <span class="category-count">
+                    <?= number_format($cat['book_count'] ?? 0) ?> ឯកសារ
+                </span>
+            </a>
             <?php endforeach; ?>
         </div>
     </div>
