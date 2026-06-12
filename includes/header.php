@@ -18,16 +18,18 @@ $siteNameEn = getSetting('site_name_en', 'Khmer Digital Library');
 $pageTitle  = $pageTitle ?? $siteNameEn;
 $bodyClass  = $bodyClass ?? '';
 
-// ─── Fetch display name fresh from DB for correct Khmer UTF-8 ───
-// $_SESSION['user_name'] may be corrupted on Windows XAMPP.
-// We always pull the name direct from the DB via PDO (utf8mb4).
+// ─── Fetch display name and role fresh from DB for correct Khmer UTF-8 ───
+// $_SESSION['user_name'] and $_SESSION['user_role'] may be corrupted or missing on Windows XAMPP.
+// We always pull them direct from the DB via PDO (utf8mb4).
 $navUserName = '';
+$navUserRole = '';
 if (isLoggedIn() && !empty($_SESSION['user_id'])) {
     $pdo = getPDO();
-    $navUserStmt = $pdo->prepare('SELECT name FROM users WHERE id = ? LIMIT 1');
+    $navUserStmt = $pdo->prepare('SELECT name, role FROM users WHERE id = ? LIMIT 1');
     $navUserStmt->execute([$_SESSION['user_id']]);
     $navUserRow  = $navUserStmt->fetch();
     $navUserName = $navUserRow['name'] ?? '';
+    $navUserRole = $navUserRow['role'] ?? '';
 }
 // ──────────────────────────────────────────────────────
 
@@ -135,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="<?= BASE_URL ?>/browse.php" class="nav-link-custom <?= (basename($_SERVER['PHP_SELF']) === 'browse.php') ? 'active' : '' ?>">
                 <i class="bi bi-grid me-1"></i>ស្វែងរកសៀវភៅ
             </a>
-            <?php if (isLoggedIn() && in_array($_SESSION['user_role'] ?? '', ['admin','superadmin'])): ?>
+            <?php if (isLoggedIn() && in_array($navUserRole, ['admin','superadmin'])): ?>
             <a href="<?= BASE_URL ?>/admin/index.php" class="nav-link-custom">
                 <i class="bi bi-speedometer2 me-1"></i>Admin Panel
             </a>
@@ -148,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="d-flex align-items-center gap-2">
                     <span class="d-none d-md-block" style="font-family:'Kantumruy Pro','Hanuman',sans-serif;font-size:.8rem;color:rgba(255,255,255,.8);">
                         <span style="display:inline-flex;align-items:center;vertical-align:middle;">
-                            <?php if (in_array($_SESSION['user_role'] ?? '', ['admin', 'superadmin'])): ?>
+                            <?php if (in_array($navUserRole, ['admin', 'superadmin'])): ?>
                                 <span style="width:24px;height:24px;border-radius:50%;border:1px solid #C8960C;background:#fff;display:inline-block;overflow:hidden;flex-shrink:0;margin-right:6px;">
                                     <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;">
                                 </span>
