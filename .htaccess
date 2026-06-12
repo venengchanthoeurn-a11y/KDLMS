@@ -44,11 +44,35 @@ php_value mbstring.func_overload "0"
 </IfModule>
 
 # ----------------------------------------------------------------
-# Protect .htaccess itself
+# Protect sensitive files, databases, logs, and .htaccess itself
 # ----------------------------------------------------------------
+<FilesMatch "^(kdlms\.sqlite|php\.ini|vercel\.json|composer\.json|package\.json|package-lock\.json|README\.md|\.env.*|\.git.*)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<FilesMatch "\.(sqlite|sqlite3|db|sql|log)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
 <Files ".htaccess">
     <IfModule mod_authz_core.c>
         Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
     </IfModule>
 </Files>
 
