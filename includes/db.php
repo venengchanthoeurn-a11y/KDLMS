@@ -62,7 +62,7 @@ function detectBaseUrl(): string {
 define('BASE_URL', detectBaseUrl());
 
 // ─── App version ─────────────────────────────────────────────────
-define('APP_VERSION', '1.0');
+define('APP_VERSION', '1.1');
 
 
 // Define custom SafePDO classes for read-only SQLite fallback

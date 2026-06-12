@@ -1157,7 +1157,7 @@ body {
     background: var(--bg);
 }
 
-/* Custom 7-Column Grid for Categories */
+/* Custom 6-Column Grid for Categories */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1167,24 +1167,29 @@ body {
 
 @media (min-width: 576px) {
     .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 768px) {
-    .categories-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets (divides 42 perfectly) */
     }
 }
 
 @media (min-width: 992px) {
     .categories-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr); /* 6 columns for desktop (divides 42 perfectly into 6x7 grid) */
     }
 }
 
-@media (min-width: 1200px) {
-    .categories-grid {
-        grid-template-columns: repeat(7, 1fr); /* Exactly 7 columns to make a 6x7 grid */
+/* Optimize category cards space for 6 columns on desktop */
+@media (min-width: 992px) {
+    .category-card {
+        padding: 1rem 0.6rem;
+    }
+    .category-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    .category-name-kh {
+        font-size: 0.76rem;
+    }
+    .category-name-en {
+        font-size: 0.62rem;
     }
 }
