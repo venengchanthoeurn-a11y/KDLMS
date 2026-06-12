@@ -375,6 +375,9 @@ function timeAgo(string $datetime): string {
  * redirect() — Send location header and exit.
  */
 function redirect(string $url): void {
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_write_close();
+    }
     header('Location: ' . $url);
     exit;
 }
