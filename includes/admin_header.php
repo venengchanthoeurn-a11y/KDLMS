@@ -157,8 +157,8 @@ $navItems = [
             </a>
 
             <div class="admin-user-pill">
-                <div class="admin-user-avatar">
-                    <?= mb_strtoupper(mb_substr($user['name'] ?? 'A', 0, 1, 'UTF-8'), 'UTF-8') ?>
+                <div class="admin-user-avatar" style="background:#fff;border:1px solid #C8960C;overflow:hidden;padding:1.5px;display:flex;align-items:center;justify-content:center;">
+                    <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="max-width:100%;max-height:100%;object-fit:contain;">
                 </div>
                 <div class="d-none d-md-block">
                     <div style="line-height:1.2;font-family:'Kantumruy Pro','Hanuman',sans-serif;"><?= htmlspecialchars($user['name'] ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></div>

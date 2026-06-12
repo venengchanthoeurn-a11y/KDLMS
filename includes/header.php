@@ -147,8 +147,12 @@ document.addEventListener('DOMContentLoaded', function() {
             <?php if (isLoggedIn()): ?>
                 <div class="d-flex align-items-center gap-2">
                     <span class="d-none d-md-block" style="font-family:'Kantumruy Pro','Hanuman',sans-serif;font-size:.8rem;color:rgba(255,255,255,.8);">
-                        <i class="bi bi-person-circle me-1"></i>
-                        <?= htmlspecialchars($navUserName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
+                        <span style="display:inline-flex;align-items:center;vertical-align:middle;">
+                            <span style="width:24px;height:24px;border-radius:50%;border:1px solid #C8960C;background:#fff;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;padding:1.5px;flex-shrink:0;margin-right:6px;">
+                                <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="User Avatar" style="max-width:100%;max-height:100%;object-fit:contain;">
+                            </span>
+                            <?= htmlspecialchars($navUserName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
+                        </span>
                     </span>
                     <a href="<?= BASE_URL ?>/logout.php" class="btn-secondary-kdlms py-2 px-3" style="font-size:.8rem;">
                         <i class="bi bi-power"></i>

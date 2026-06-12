@@ -86,7 +86,9 @@ $stats      = getStats();
                     ប្រព័ន្ធ KDLMS ត្រូវបានរចនា និងអភិវឌ្ឍដោយប្រើ PHP 8, MySQL, Bootstrap 5 ក្នុងគោលបំណង ផ្ដល់ការចូលដំណើរការឯកសារ និងសៀវភៅ ប្រកបដោយភាព ប្រសើរ។
                 </p>
                 <div style="margin-top:12px;padding:10px 14px;background:rgba(200,150,12,.12);border:1px solid rgba(200,150,12,.25);border-radius:8px;font-size:.75rem;display:flex;align-items:center;gap:12px;">
-                    <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="អេង ចាន់ធឿន" style="width:60px;height:60px;border-radius:50%;object-fit:contain;background:#fff;border:1.5px solid #C8960C;flex-shrink:0;padding:2px;">
+                    <div style="width:50px;height:50px;border-radius:50%;border:1.5px solid #C8960C;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;padding:2px;">
+                        <img src="<?= BASE_URL ?>/assets/img/creator.jpg" alt="អេង ចាន់ធឿន" style="max-width:100%;max-height:100%;object-fit:contain;">
+                    </div>
                     <div>
                         <div style="color:#F5D76E;font-family:'Kantumruy Pro',sans-serif;font-weight:700;margin-bottom:3px;">
                             <i class="bi bi-code-slash me-1"></i>បង្កើតដោយ (Created by)
